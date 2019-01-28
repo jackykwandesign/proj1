@@ -1,0 +1,21 @@
+{
+  "name": "testgraphql",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js",
+    "dev": "nodemon index.js localhost 4000 "
+  },
+  "author": "",
+  "license": "ISC",
+  "keywords": [],
+  "dependencies": {
+    "apollo-server": "^2.3.1",
+    "graphql": "^14.0.2",
+    "jsonwebtoken": "^8.4.0",
+    "screen": "^0.2.10"
+  },
+  "devDependencies": {},
+  "description": ""
+}
