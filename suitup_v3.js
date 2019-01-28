@@ -6,7 +6,7 @@ const {ApolloServer,gql} = require('apollo-server');
 const meId = 1;
 const hashtags = [
   {
-    id: 2,
+    id: 12,
     name: 'hashtag_name_1',
   },
   {
