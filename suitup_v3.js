@@ -166,26 +166,36 @@ function filterGetAndListByGivenDesignList(designlist){
     let or_list = [];
     designlist.forEach(function (design){   
     let and_list = [];
-    
-    let firsttag = design.beginHashtagid;
-    let start = 0;
-    and_list.push(firsttag);
+    and_list.push(design.beginHashtagid);
     for(let i in design.hashtags_r){
-        if ((design.ops[i] === 1)|(design.hashtags_r.length-1 == i)){
-            if (i == design.hashtags_r.length-1){
-                and_list.push(design.hashtags_r.slice(start,i+1));
-            }else{
-                and_list.push(design.hashtags_r.slice(start,i));
-            }
+        if (design.ops[i] === 1){
             or_list.push({list1:and_list});
             and_list = [];
-            start = i;
-            firsttag = design.hashtags_r[i];            
+            and_list.push(design.hashtags_r[i]);            
+        }else{
+            and_list.push(design.hashtags_r[i]);
+        }
+      	if((design.hashtags_r.length - 1) == i ){
+            or_list.push({list1:and_list});
         }
     }
-    
     });
     return or_list;
+};
+function haveSameTag(oneList,givenClothes){
+    let c_tag = givenClothes.hashtagIds;
+    let result = true;
+    c_tag.forEach(function(element){
+        if(oneList.indexOf(element)>-1){
+        }else{
+            result = false;
+        }
+    });
+    if (result){
+        return true;
+    }else{
+        return false;
+    }
 }
 function filterGivenlistByHashtagIds(clotheslist,hashtagIds){
 	let clothes_f = clotheslist;
