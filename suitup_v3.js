@@ -163,10 +163,30 @@ const findClothesByName = name => all_clothes_c.find(clothes => clothes.name ===
 const findHashtagByHashtagId = hashtagId => hashtags.find(hashtag => hashtag.id === Number(hashtagId));
 const filterGivenlistByHashtagId = (clotheslist,hashtagsId) => clotheslist.filter(clothes => clothes.hashtagIds.find(ids => ids === Number(hashtagsId)));
 function filterGetAndListByGivenDesignList(designlist){
-	designlist.forEach();
-	
-	
-};
+    let or_list = [];
+    designlist.forEach(function (design){   
+    let and_list = [];
+    
+    let firsttag = design.beginHashtagid;
+    let start = 0;
+    and_list.push(firsttag);
+    for(let i in design.hashtags_r){
+        if ((design.ops[i] === 1)|(design.hashtags_r.length-1 == i)){
+            if (i == design.hashtags_r.length-1){
+                and_list.push(design.hashtags_r.slice(start,i+1));
+            }else{
+                and_list.push(design.hashtags_r.slice(start,i));
+            }
+            or_list.push({list1:and_list});
+            and_list = [];
+            start = i;
+            firsttag = design.hashtags_r[i];            
+        }
+    }
+    
+    });
+    return or_list;
+}
 function filterGivenlistByHashtagIds(clotheslist,hashtagIds){
 	let clothes_f = clotheslist;
 	hashtagIds.foreach(function (hash_tag,i){
