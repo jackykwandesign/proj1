@@ -26,7 +26,7 @@
         }
     }
     query c_name{
-      clothes_name(name: "Kevin"){
+      clothes_name(name: "clothes_name_1"){
         id
         name
       }
