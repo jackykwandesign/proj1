@@ -37,4 +37,4 @@ const Clothes = () => (
   </Query>
 );
 export default Clothes;
-
+export default getAllc;
