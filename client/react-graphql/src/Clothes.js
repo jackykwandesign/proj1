@@ -12,6 +12,7 @@ const getAll_clothesQuery = gql`
 `;
 let c_lists;
 function getAllc(){
+	Clothes();
 	return c_lists;
 }
 const Clothes = () => (
@@ -36,5 +37,5 @@ const Clothes = () => (
     }}
   </Query>
 );
-export default Clothes;
+//export default Clothes;
 export default getAllc;
