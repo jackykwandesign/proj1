@@ -15,7 +15,7 @@ const Clothes = () => (
   <Query query={getAll_clothesQuery}>
     {({ loading, error, data }) => {
       if (loading) return <p>Loading...</p>;
-      if (error) return <p>Error :( error.message</p>;
+      if (error) return <p>Error :(</p>;
       const lists = data.all_clothes.map(currentClothes => (
         <li key={currentClothes.id}>
           <li>id: {currentClothes.id}</li>
@@ -33,4 +33,3 @@ const Clothes = () => (
   </Query>
 );
 export default Clothes;
-//export default getAllc;
