@@ -78,13 +78,13 @@ var all_clothes_c = [
 
 ];
 const design_r_c = [
-	{
-		id:11,
-		beginHashtagid: 1,
-		hashtags_r:[2,3,4],
-		ops:[0,1,0],
-		score:10,
-	},{
+    {
+        id:11,
+        beginHashtagid: 1,
+        hashtags_r:[2,3,4],
+        ops:[0,1,0],
+        score:10,
+    },{
                 id:22,
                 beginHashtagid: 1,
                 hashtags_r:[3,4,5],
@@ -93,22 +93,22 @@ const design_r_c = [
         },{
                 id:33,
                 beginHashtagid: 1,
-                hashtags_r:[2,3,4],
+                hashtags_r:[2,1,6],
                 ops:[0,1,0],
                 score:30,
         },
-	{
+    {
                 id:44,
                 beginHashtagid: 1,
                 hashtags_r:[2,5,6],
                 ops:[0,1,0],
                 score:40,
         },
-	{
+    {
                 id:55,
                 beginHashtagid: 1,
-                hashtags_r:[3,5,6],
-                ops:[0,1,0],
+                hashtags_r:[3,2,4,4,5,5,4,5],
+                ops:[0,1,0,0,0,0,1,0],
                 score:50,
         },
 
