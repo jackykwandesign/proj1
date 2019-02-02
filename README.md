@@ -3,7 +3,7 @@
 2. npm install
 3. npm run dev
 
-# graphQL playground: http://localhost:3100/
+# graphQL playground: http://vmkwan.pod.hk:3100/
 ## Hello World
     query h{
         hello
