@@ -253,7 +253,7 @@ const resolvers = {
 			       if (related_d.length >0){
 			       		related_d.forEach(function (design){
 						thisClothes.s = thisClothes.s + design.score;
-					}
+					});
 			       }
                         });
 			return clothes_list;
