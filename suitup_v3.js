@@ -143,7 +143,7 @@ const typeDefs = gql`
                 hashtag(id:ID!):Hashtag
 		clothesbyHashtagId(id:ID!):[Clothes]
 		design:[Design_r]
-		getsuggest(c_id:ID!,req_id:ID!):Clothes
+		getsuggest(c_id:ID!,req_id:ID!):[Clothes]
 				
         }
 	type Mutation{
