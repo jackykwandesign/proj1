@@ -13,20 +13,12 @@ const client = new ApolloClient({
 
 
 
-
-
-
-
-
-
-
 function App() {
   return (
     <ApolloProvider client={client}>
       <div>
         <Clothes />
       </div>
-        getAllc()[0].name;
     </ApolloProvider>
   );
 }
