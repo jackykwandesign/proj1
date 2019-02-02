@@ -164,21 +164,21 @@ const findHashtagByHashtagId = hashtagId => hashtags.find(hashtag => hashtag.id 
 const filterGivenlistByHashtagId = (clotheslist,hashtagsId) => clotheslist.filter(clothes => clothes.hashtagIds.find(ids => ids === Number(hashtagsId)));
 function filterGetAndListByGivenDesignList(designlist){
     let or_list = [];
-    designlist.forEach(function (design){   
-    let and_list = [];
-    and_list.push(design.beginHashtagid);
-    for(let i in design.hashtags_r){
-        if (design.ops[i] === 1){
-            or_list.push({list1:and_list});
-            and_list = [];
-            and_list.push(design.hashtags_r[i]);            
-        }else{
-            and_list.push(design.hashtags_r[i]);
+    designlist.forEach(function (design,design_i){   
+        let and_list = [];
+        and_list.push(design.beginHashtagid);
+        for(let i in design.hashtags_r){
+            if (design.ops[i] === 1){
+                or_list.push({list1:and_list,design_index:design_i,end:false});
+                and_list = [];
+                and_list.push(design.hashtags_r[i]);            
+            }else{
+                and_list.push(design.hashtags_r[i]);
+            }
+      	    if((design.hashtags_r.length - 1) == i ){
+                or_list.push({list1:and_list,design_index:design_i,end:true});
+            }
         }
-      	if((design.hashtags_r.length - 1) == i ){
-            or_list.push({list1:and_list});
-        }
-    }
     });
     return or_list;
 };
@@ -205,9 +205,18 @@ function filterGivenlistByHashtagIds(clotheslist,hashtagIds){
 	return clothes_f;
 };
 
-//function filterDesignByClothes(designlist,givenClothes){
-	
-//}
+function filterDesignByClothes(designlist,givenClothes){
+    let c = filterGetAndListByGivenDesignList(designlist);
+    let r = [];
+    for (let i = 0;i < c.length;++i){
+        if (haveSameTag(c[i].list1,givenClothes)){
+            if (r.indexOf(c[i].design_index)<0){
+                r.push(c[i].design_index);
+            }            
+        }
+    }
+    return r;
+};
 const findDesignByid = input => design_r_c.find(design => design.id === Number(input));
 
 
