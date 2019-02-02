@@ -51,6 +51,14 @@
         score
       }
     }
+## query suggestion
+    query sug{
+      getsuggest(c_id:6,req_id:2){//clothes id and required tags id
+        id
+        name
+        s
+      }
+    }
 ## mutation example
 
     mutation addc{
