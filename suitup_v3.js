@@ -5,8 +5,9 @@ const {ApolloServer,gql} = require('apollo-server');
 //fake data
 const meId = 1;
 const hashtags = [
+
   {
-    id: 12,
+    id: 1,
     name: 'hashtag_name_1',
   },
   {
@@ -27,6 +28,10 @@ const hashtags = [
   },
   {
     id: 6,
+    name: 'hashtag_name_6',
+  },
+  {
+    id: 7,
     name: 'hashtag_name_6',
   }
 ];
@@ -275,7 +280,7 @@ const resolvers = {
                         let design1 = findDesignByid(id);
 			let beginid = design1.beginHashtagid;
 			let tag = findHashtagByHashtagId(beginid);
-			if (!tag) throw new Error(`hashtag ${id} Not Exists`);
+			if (!tag) throw new Error(`hashtag ${beginid} Not Exists`);
 			return tag;
                 },
  
