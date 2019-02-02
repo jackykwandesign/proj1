@@ -126,6 +126,7 @@ const typeDefs = gql`
                 id:ID!
                 name: String!
                 hashtags: [Hashtag]
+		s:Int
         }
         type Design_r{
 		id:ID!
