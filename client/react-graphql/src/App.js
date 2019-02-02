@@ -19,7 +19,6 @@ function App() {
       <div>
         <Clothes />
       </div>
-        getAllc()[0].name;
     </ApolloProvider>
   );
 }
