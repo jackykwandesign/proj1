@@ -6,7 +6,7 @@ import Clothes from "./Clothes";
 import ApolloClient from 'apollo-boost';
 
 const client = new ApolloClient({
-  uri: 'http://vmkwan.pod.hk:3000/'
+  uri: 'http://vmkwan.pod.hk:3100/'
 });
 
 
