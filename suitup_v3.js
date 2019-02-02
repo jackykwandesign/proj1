@@ -169,14 +169,14 @@ function filterGetAndListByGivenDesignList(designlist){
         and_list.push(design.beginHashtagid);
         for(let i in design.hashtags_r){
             if (design.ops[i] === 1){
-                or_list.push({list1:and_list,design_index:design_i,end:false});
+                or_list.push({list1:and_list,design_id:design.id,end:false});
                 and_list = [];
                 and_list.push(design.hashtags_r[i]);            
             }else{
                 and_list.push(design.hashtags_r[i]);
             }
       	    if((design.hashtags_r.length - 1) == i ){
-                or_list.push({list1:and_list,design_index:design_i,end:true});
+                or_list.push({list1:and_list,design_id:design.id,end:true});
             }
         }
     });
@@ -207,18 +207,30 @@ function filterGivenlistByHashtagIds(clotheslist,hashtagIds){
 
 function filterDesignByClothes(designlist,givenClothes){
     let c = filterGetAndListByGivenDesignList(designlist);
-    let r = [];
+    let ids = [];
     for (let i = 0;i < c.length;++i){
         if (haveSameTag(c[i].list1,givenClothes)){
-            if (r.indexOf(c[i].design_index)<0){
-                r.push(c[i].design_index);
+            if (ids.indexOf(c[i].design_id)<0){
+                ids.push(c[i].design_id);
             }            
         }
     }
+    let result = filterDesignByDesignids(designlist,ids);
+    return result;
+};
+
+const findDesignByid = input => design_r_c.find(design => design.id === Number(input));
+function filterDesignByDesignids(designlist,ids){
+    let r = [];
+    let temp_design;
+       ids.forEach(function (id){
+       temp_design = findDesignByid(id);
+       if (r.indexOf(temp_design)<0){
+            r.push(temp_design);
+       }    
+    });
     return r;
 };
-const findDesignByid = input => design_r_c.find(design => design.id === Number(input));
-
 
 const resolvers = {
         Query:{
@@ -233,41 +245,18 @@ const resolvers = {
 		getsuggest:(parent,args,context) => {
 			const {c_id,req_id} = args;
 			let clothes_list = filterAllClothesByHashtagId(req_id);
-			//let filted_design_with_given_clothes = 
-			design_r_c.forEach(function (design){
-                                
-                                let and_list = [];
-                                let or_list = [];
-				let firsttag = design.beginHashtagid;
-                                let start = 0;
-  						
-  				and_list.push(firsttag);
-                                for(let i in design.hashtags_r){
-                                  		
-                                        if ((design.ops[i] === 1)|(design.hashtags_r.length-1 == i)){
-                                       		if (i == design.hashtags_r.length-1){
-                                                	and_list.push(design.hashtags_r.slice(start,i+1));
-                                                }else{
-                                                    and_list.push(design.hashtags_r.slice(start,i));
-                                                }
-                                                let clothesl = filterGivenlistByHashtagIds(clothes_list,and_list);
-						or_list.push({list:and_list});
-						if (clothesl.length < 1){
-							
-						}
-						else{
-							
-						}
-                                          	or_count = or_count+1;
-                                                and_list = [];
-                                                start = i;
-                                                firsttag = design.hashtags_r[i];
-                                        	
-                                        }
-                                }
+			let given_c = findClothesByClothesId(c_id);
+			let filted_design_with_given_clothes = filterDesignByClothes(design_r_c,given_c);
+			clothes_list.forEach(function (thisClothes){
+				thisClothes.s = 0;
+                               let related_d = filterDesignByClothes(filted_design_with_given_clothes,thisClothes);
+			       if (related_d.length >0){
+			       		related_d.forEach(function (design){
+						thisClothes.s = thisClothes.s + design.score;
+					}
+			       }
                         });
-
-
+			return clothes_list;
 		},
         },
         Clothes:{
